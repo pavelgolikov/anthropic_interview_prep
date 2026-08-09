@@ -40,59 +40,6 @@ implementing the service's bookkeeping, not moving any bytes. "Upload" means
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Level 3 — Refactoring & encapsulation
 
 Files may now have a lifetime. Every Level 1/2 method gains a timestamped twin.
@@ -113,6 +60,18 @@ A dead file is indistinguishable from a file that never existed.
 - `file_search_at(timestamp, prefix)` — as Level 2, but only living files.
 
 ---
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Level 4 — Extending design & functionality
 

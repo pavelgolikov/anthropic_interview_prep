@@ -82,25 +82,6 @@ class TestLevel2(unittest.TestCase):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class TestLevel3(unittest.TestCase):
     def setUp(self):
         self.fh = FileHost()
@@ -147,6 +128,10 @@ class TestLevel3(unittest.TestCase):
         self.fh.file_upload_at(0, "big2.txt", 100)
         self.assertListEqual(self.fh.file_search_at(4, "big"), ["big.txt", "big2.txt"])
         self.assertListEqual(self.fh.file_search_at(5, "big"), ["big2.txt"])
+
+
+
+
 
 
 class TestLevel4(unittest.TestCase):
