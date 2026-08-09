@@ -11,6 +11,10 @@ You are implementing a simplified file hosting service. All state is in memory.
 Timestamps are integers (seconds). There is no wall clock — time only advances when
 a method is called with a timestamp.
 
+Files have **no contents**. A file is nothing but a name and a size; you are
+implementing the service's bookkeeping, not moving any bytes. "Upload" means
+"record that this name now exists with this size".
+
 ---
 
 ## Level 1 — Initial design & basic functions
@@ -35,6 +39,59 @@ a method is called with a timestamp.
   - Returns `[]` when nothing matches.
 
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Level 3 — Refactoring & encapsulation
 
