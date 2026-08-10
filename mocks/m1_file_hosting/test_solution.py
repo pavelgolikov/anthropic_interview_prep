@@ -131,9 +131,6 @@ class TestLevel3(unittest.TestCase):
 
 
 
-
-
-
 class TestLevel4(unittest.TestCase):
     def setUp(self):
         self.fh = FileHost()

@@ -3,22 +3,41 @@
 Only Level 1 signatures are given, exactly as CodeSignal would hand them to you.
 Add the later levels' methods yourself as you unlock them.
 """
-import copy
 
 
 class FileHost:
     def __init__(self):
-        # self.files has entries: {"filename": {"timestamp": int, "size": int, "expires_on": int}}
-        self.files = {}
+        self.files = {} # {"filename": {"size": int, "owner": user_id, "expires_on": int}}
+        self.users = {} # {"user_id": {"capacity": int}}
+    
     
     def _alive(self, file_name, timestamp):
         # return rec["expires_at"] is None or timestamp < rec["expires_at"]
         return file_name in self.files.keys() and (self.files[file_name]['expires_on'] is None or timestamp < self.files[file_name]['expires_on'])
+
+    def _living(self, timestamp):
+        return {k: v for k, v in self.files.items() if self._alive(k, timestamp)}
+    
+    def _remaining(self, user_id, timestamp):
+        # compute how much capacity user_id has remaining at timestamp
+        used = sum( [v['size'] for k, v in self._living(timestamp).items() if v['owner'] == user_id])
+        return self.users[user_id]['capacity'] - used
+    
+    def _write(self, timestamp, file_name, size, ttl, user_id):
+        if self._alive(file_name, timestamp):
+            raise RuntimeError("there is already a file by that name")
+        self.files[file_name] = {"size": size, "expires_on": None if ttl is None else timestamp + ttl, "owner": user_id}
         
+    def file_upload_at_by(self, timestamp, user_id, file_name, size, ttl=None):
+        if user_id not in self.users.keys():
+            raise RuntimeError("user_id does not exist")
+        if self._remaining(user_id, timestamp) < size:
+            return None
+        self._write(timestamp, file_name, size, ttl, user_id)
+        return self._remaining(user_id, timestamp)
+
     def file_upload_at(self, timestamp, file_name, size, ttl=None):
-        if file_name in self.files.keys() and self._alive(file_name, timestamp):
-            raise RuntimeError
-        self.files[file_name] = {"timestamp": timestamp, "size": size, "expires_on": None if ttl is None else timestamp + ttl}
+        self._write(timestamp, file_name, size, ttl, None)
         return None
     
     def file_upload(self, file_name, size):
@@ -26,7 +45,7 @@ class FileHost:
     
     def file_get_at(self, timestamp, file_name):
         # how to handle dead files? we need a cleanup procedure any time we access?
-        if not file_name in self.files.keys() or not self._alive(file_name, timestamp):
+        if not self._alive(file_name, timestamp):
             return None
         return self.files.get(file_name).get("size")
 
@@ -34,9 +53,9 @@ class FileHost:
         return self.file_get_at(0, file_name)
 
     def file_copy_at(self, timestamp, source, dest):
-        if source not in self.files.keys() or not self._alive(source, timestamp):
+        if not self._alive(source, timestamp):
             raise RuntimeError
-        self.files[dest] = copy.deepcopy(self.files[source])
+        self.files[dest] = {**self.files[source], 'owner': None}
         return None
 
     def file_copy(self, source, dest):
@@ -44,31 +63,33 @@ class FileHost:
     
     def file_search_at(self, timestamp, prefix):
         # need pairs (name, size) have 
-        # valid_keys = [k for k in self.files.keys() if k.startswith(prefix)]
         pairs = [(v['size'], k) for k, v in self.files.items() if (k.startswith(prefix) and self._alive(k, timestamp))]
-        # print(pairs)
         prefixes_ordered = [pair[1] for pair in sorted(pairs, key=lambda p: (-p[0], p[1]))][:10]
         return prefixes_ordered
     
     def file_search(self, prefix):
         return self.file_search_at(0, prefix)
     
+    def add_user(self, timestamp, user_id, capacity):
+        if user_id in self.users.keys():
+            raise RuntimeError("user already exists")
+        self.users[user_id] = {"capacity": capacity}
     
-        
+    def merge_user(self, timestamp, user_id_1, user_id_2):
+        if user_id_1 == user_id_2:
+            raise RuntimeError("same user")
+        if user_id_1 not in self.users.keys() or user_id_2 not in self.users.keys():
+            raise RuntimeError("unregistered user")
+        self.users[user_id_1]['capacity'] += self.users[user_id_2]['capacity']
+        for k, v in self.files.items():
+            if v['owner'] == user_id_2:
+                v['owner'] = user_id_1
+        del self.users[user_id_2]
+        return self._remaining(user_id_1, timestamp)
+            
 
-# Files may now have a lifetime. Every Level 1/2 method gains a timestamped twin.
-# **The Level 1 and Level 2 methods must keep working unchanged** — treat them as
-# operating at timestamp `0` with an infinite lifetime.
-
-# A file uploaded at `t` with `ttl = n` is alive for timestamps in `[t, t + n)`.
-# It is dead at exactly `t + n`. A `ttl` of `None` means it lives forever.
-# A dead file is indistinguishable from a file that never existed.
-
-# - `file_upload_at(timestamp, file_name, size, ttl=None)`
-#   - Raises `RuntimeError` only if a **living** file of that name exists. Uploading
-#     over a name whose file has expired succeeds.
-# - `file_get_at(timestamp, file_name)` — size, or `None` if missing or expired.
-# - `file_copy_at(timestamp, source, dest)`
-#   - Raises `RuntimeError` if `source` is missing or expired at `timestamp`.
-#   - The copy inherits the source's **absolute** expiry time, not a fresh `ttl`.
-# - `file_search_at(timestamp, prefix)` — as Level 2, but only living files.
+# Rules:
+# - Files uploaded via `file_upload` / `file_upload_at` are **unowned** and count
+#   against nobody's quota.
+# - Files created by `file_copy` / `file_copy_at` are also unowned, whoever owned
+#   the source.

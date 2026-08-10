@@ -19,15 +19,15 @@ test_ttl_expiry_is_exclusive (__main__.TestLevel3.test_ttl_expiry_is_exclusive) 
 test_upload_at_and_get_at (__main__.TestLevel3.test_upload_at_and_get_at) ... ok
 test_upload_over_expired_name_succeeds (__main__.TestLevel3.test_upload_over_expired_name_succeeds) ... ok
 test_upload_over_living_name_raises (__main__.TestLevel3.test_upload_over_living_name_raises) ... ok
-test_add_user_returns_none_and_rejects_duplicates (__main__.TestLevel4.test_add_user_returns_none_and_rejects_duplicates) ... ERROR
-test_copies_are_unowned (__main__.TestLevel4.test_copies_are_unowned) ... ERROR
-test_expired_file_releases_quota (__main__.TestLevel4.test_expired_file_releases_quota) ... ERROR
-test_merge_rejects_unknown_or_identical_users (__main__.TestLevel4.test_merge_rejects_unknown_or_identical_users) ... ERROR
-test_merge_sums_capacity_and_transfers_files (__main__.TestLevel4.test_merge_sums_capacity_and_transfers_files) ... ERROR
-test_over_capacity_returns_none_and_does_not_upload (__main__.TestLevel4.test_over_capacity_returns_none_and_does_not_upload) ... ERROR
-test_unowned_uploads_do_not_consume_quota (__main__.TestLevel4.test_unowned_uploads_do_not_consume_quota) ... ERROR
-test_upload_by_returns_remaining_capacity (__main__.TestLevel4.test_upload_by_returns_remaining_capacity) ... ERROR
-test_upload_by_unknown_user_raises (__main__.TestLevel4.test_upload_by_unknown_user_raises) ... ERROR
+test_add_user_returns_none_and_rejects_duplicates (__main__.TestLevel4.test_add_user_returns_none_and_rejects_duplicates) ... ok
+test_copies_are_unowned (__main__.TestLevel4.test_copies_are_unowned) ... ok
+test_expired_file_releases_quota (__main__.TestLevel4.test_expired_file_releases_quota) ... ok
+test_merge_rejects_unknown_or_identical_users (__main__.TestLevel4.test_merge_rejects_unknown_or_identical_users) ... ok
+test_merge_sums_capacity_and_transfers_files (__main__.TestLevel4.test_merge_sums_capacity_and_transfers_files) ... ok
+test_over_capacity_returns_none_and_does_not_upload (__main__.TestLevel4.test_over_capacity_returns_none_and_does_not_upload) ... ok
+test_unowned_uploads_do_not_consume_quota (__main__.TestLevel4.test_unowned_uploads_do_not_consume_quota) ... ok
+test_upload_by_returns_remaining_capacity (__main__.TestLevel4.test_upload_by_returns_remaining_capacity) ... ok
+test_upload_by_unknown_user_raises (__main__.TestLevel4.test_upload_by_unknown_user_raises) ... ok
 test_rollback_before_any_operation_empties_everything (__main__.TestLevel5.test_rollback_before_any_operation_empties_everything) ... ERROR
 test_rollback_covers_level_one_operations (__main__.TestLevel5.test_rollback_covers_level_one_operations) ... ERROR
 test_rollback_lands_on_an_exact_operation_timestamp (__main__.TestLevel5.test_rollback_lands_on_an_exact_operation_timestamp) ... ERROR
@@ -37,91 +37,10 @@ test_rollback_truncates_history (__main__.TestLevel5.test_rollback_truncates_his
 test_rollback_undoes_users_and_merges (__main__.TestLevel5.test_rollback_undoes_users_and_merges) ... ERROR
 
 ======================================================================
-ERROR: test_add_user_returns_none_and_rejects_duplicates (__main__.TestLevel4.test_add_user_returns_none_and_rejects_duplicates)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 147, in test_add_user_returns_none_and_rejects_duplicates
-    self.assertIsNone(self.fh.add_user(0, "alice", 10))
-                      ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'add_user'
-
-======================================================================
-ERROR: test_copies_are_unowned (__main__.TestLevel4.test_copies_are_unowned)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 173, in test_copies_are_unowned
-    self.fh.add_user(0, "alice", 100)
-    ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'add_user'
-
-======================================================================
-ERROR: test_expired_file_releases_quota (__main__.TestLevel4.test_expired_file_releases_quota)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 162, in test_expired_file_releases_quota
-    self.fh.add_user(0, "alice", 100)
-    ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'add_user'
-
-======================================================================
-ERROR: test_merge_rejects_unknown_or_identical_users (__main__.TestLevel4.test_merge_rejects_unknown_or_identical_users)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 192, in test_merge_rejects_unknown_or_identical_users
-    self.fh.add_user(0, "alice", 10)
-    ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'add_user'
-
-======================================================================
-ERROR: test_merge_sums_capacity_and_transfers_files (__main__.TestLevel4.test_merge_sums_capacity_and_transfers_files)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 181, in test_merge_sums_capacity_and_transfers_files
-    self.fh.add_user(0, "alice", 500)
-    ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'add_user'
-
-======================================================================
-ERROR: test_over_capacity_returns_none_and_does_not_upload (__main__.TestLevel4.test_over_capacity_returns_none_and_does_not_upload)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 156, in test_over_capacity_returns_none_and_does_not_upload
-    self.fh.add_user(0, "alice", 100)
-    ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'add_user'
-
-======================================================================
-ERROR: test_unowned_uploads_do_not_consume_quota (__main__.TestLevel4.test_unowned_uploads_do_not_consume_quota)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 168, in test_unowned_uploads_do_not_consume_quota
-    self.fh.add_user(0, "alice", 100)
-    ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'add_user'
-
-======================================================================
-ERROR: test_upload_by_returns_remaining_capacity (__main__.TestLevel4.test_upload_by_returns_remaining_capacity)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 142, in test_upload_by_returns_remaining_capacity
-    self.fh.add_user(0, "alice", 1000)
-    ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'add_user'
-
-======================================================================
-ERROR: test_upload_by_unknown_user_raises (__main__.TestLevel4.test_upload_by_unknown_user_raises)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 153, in test_upload_by_unknown_user_raises
-    self.fh.file_upload_at_by(0, "nobody", "a.txt", 1)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'file_upload_at_by'. Did you mean: 'file_upload_at'?
-
-======================================================================
 ERROR: test_rollback_before_any_operation_empties_everything (__main__.TestLevel5.test_rollback_before_any_operation_empties_everything)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 218, in test_rollback_before_any_operation_empties_everything
+  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 215, in test_rollback_before_any_operation_empties_everything
     self.fh.rollback(0)
     ^^^^^^^^^^^^^^^^
 AttributeError: 'FileHost' object has no attribute 'rollback'
@@ -130,7 +49,7 @@ AttributeError: 'FileHost' object has no attribute 'rollback'
 ERROR: test_rollback_covers_level_one_operations (__main__.TestLevel5.test_rollback_covers_level_one_operations)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 232, in test_rollback_covers_level_one_operations
+  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 229, in test_rollback_covers_level_one_operations
     self.fh.rollback(5)
     ^^^^^^^^^^^^^^^^
 AttributeError: 'FileHost' object has no attribute 'rollback'
@@ -139,7 +58,7 @@ AttributeError: 'FileHost' object has no attribute 'rollback'
 ERROR: test_rollback_lands_on_an_exact_operation_timestamp (__main__.TestLevel5.test_rollback_lands_on_an_exact_operation_timestamp)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 213, in test_rollback_lands_on_an_exact_operation_timestamp
+  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 210, in test_rollback_lands_on_an_exact_operation_timestamp
     self.fh.rollback(20)
     ^^^^^^^^^^^^^^^^
 AttributeError: 'FileHost' object has no attribute 'rollback'
@@ -148,7 +67,7 @@ AttributeError: 'FileHost' object has no attribute 'rollback'
 ERROR: test_rollback_preserves_absolute_expiry (__main__.TestLevel5.test_rollback_preserves_absolute_expiry)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 225, in test_rollback_preserves_absolute_expiry
+  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 222, in test_rollback_preserves_absolute_expiry
     self.fh.rollback(60)
     ^^^^^^^^^^^^^^^^
 AttributeError: 'FileHost' object has no attribute 'rollback'
@@ -157,7 +76,7 @@ AttributeError: 'FileHost' object has no attribute 'rollback'
 ERROR: test_rollback_removes_later_uploads (__main__.TestLevel5.test_rollback_removes_later_uploads)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 206, in test_rollback_removes_later_uploads
+  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 203, in test_rollback_removes_later_uploads
     self.assertIsNone(self.fh.rollback(15))
                       ^^^^^^^^^^^^^^^^
 AttributeError: 'FileHost' object has no attribute 'rollback'
@@ -166,7 +85,7 @@ AttributeError: 'FileHost' object has no attribute 'rollback'
 ERROR: test_rollback_truncates_history (__main__.TestLevel5.test_rollback_truncates_history)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 248, in test_rollback_truncates_history
+  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 245, in test_rollback_truncates_history
     self.fh.rollback(15)
     ^^^^^^^^^^^^^^^^
 AttributeError: 'FileHost' object has no attribute 'rollback'
@@ -175,12 +94,12 @@ AttributeError: 'FileHost' object has no attribute 'rollback'
 ERROR: test_rollback_undoes_users_and_merges (__main__.TestLevel5.test_rollback_undoes_users_and_merges)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 237, in test_rollback_undoes_users_and_merges
-    self.fh.add_user(0, "alice", 100)
+  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 238, in test_rollback_undoes_users_and_merges
+    self.fh.rollback(4)
     ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'add_user'
+AttributeError: 'FileHost' object has no attribute 'rollback'
 
 ----------------------------------------------------------------------
-Ran 37 tests in 0.003s
+Ran 37 tests in 0.002s
 
-FAILED (errors=16)
+FAILED (errors=7)

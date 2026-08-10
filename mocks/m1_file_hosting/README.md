@@ -61,18 +61,6 @@ A dead file is indistinguishable from a file that never existed.
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
 ## Level 4 — Extending design & functionality
 
 Files may now belong to a user with a storage quota.
@@ -102,6 +90,37 @@ Rules:
   the source.
 
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Level 5 — Historical state
 
