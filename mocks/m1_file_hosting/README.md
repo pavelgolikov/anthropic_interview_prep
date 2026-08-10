@@ -91,37 +91,6 @@ Rules:
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Level 5 — Historical state
 
 - `rollback(timestamp)`

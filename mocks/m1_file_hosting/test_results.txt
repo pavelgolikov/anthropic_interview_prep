@@ -28,78 +28,15 @@ test_over_capacity_returns_none_and_does_not_upload (__main__.TestLevel4.test_ov
 test_unowned_uploads_do_not_consume_quota (__main__.TestLevel4.test_unowned_uploads_do_not_consume_quota) ... ok
 test_upload_by_returns_remaining_capacity (__main__.TestLevel4.test_upload_by_returns_remaining_capacity) ... ok
 test_upload_by_unknown_user_raises (__main__.TestLevel4.test_upload_by_unknown_user_raises) ... ok
-test_rollback_before_any_operation_empties_everything (__main__.TestLevel5.test_rollback_before_any_operation_empties_everything) ... ERROR
-test_rollback_covers_level_one_operations (__main__.TestLevel5.test_rollback_covers_level_one_operations) ... ERROR
-test_rollback_lands_on_an_exact_operation_timestamp (__main__.TestLevel5.test_rollback_lands_on_an_exact_operation_timestamp) ... ERROR
-test_rollback_preserves_absolute_expiry (__main__.TestLevel5.test_rollback_preserves_absolute_expiry) ... ERROR
-test_rollback_removes_later_uploads (__main__.TestLevel5.test_rollback_removes_later_uploads) ... ERROR
-test_rollback_truncates_history (__main__.TestLevel5.test_rollback_truncates_history) ... ERROR
-test_rollback_undoes_users_and_merges (__main__.TestLevel5.test_rollback_undoes_users_and_merges) ... ERROR
-
-======================================================================
-ERROR: test_rollback_before_any_operation_empties_everything (__main__.TestLevel5.test_rollback_before_any_operation_empties_everything)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 215, in test_rollback_before_any_operation_empties_everything
-    self.fh.rollback(0)
-    ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'rollback'
-
-======================================================================
-ERROR: test_rollback_covers_level_one_operations (__main__.TestLevel5.test_rollback_covers_level_one_operations)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 229, in test_rollback_covers_level_one_operations
-    self.fh.rollback(5)
-    ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'rollback'
-
-======================================================================
-ERROR: test_rollback_lands_on_an_exact_operation_timestamp (__main__.TestLevel5.test_rollback_lands_on_an_exact_operation_timestamp)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 210, in test_rollback_lands_on_an_exact_operation_timestamp
-    self.fh.rollback(20)
-    ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'rollback'
-
-======================================================================
-ERROR: test_rollback_preserves_absolute_expiry (__main__.TestLevel5.test_rollback_preserves_absolute_expiry)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 222, in test_rollback_preserves_absolute_expiry
-    self.fh.rollback(60)
-    ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'rollback'
-
-======================================================================
-ERROR: test_rollback_removes_later_uploads (__main__.TestLevel5.test_rollback_removes_later_uploads)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 203, in test_rollback_removes_later_uploads
-    self.assertIsNone(self.fh.rollback(15))
-                      ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'rollback'
-
-======================================================================
-ERROR: test_rollback_truncates_history (__main__.TestLevel5.test_rollback_truncates_history)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 245, in test_rollback_truncates_history
-    self.fh.rollback(15)
-    ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'rollback'
-
-======================================================================
-ERROR: test_rollback_undoes_users_and_merges (__main__.TestLevel5.test_rollback_undoes_users_and_merges)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m1_file_hosting/test_solution.py", line 238, in test_rollback_undoes_users_and_merges
-    self.fh.rollback(4)
-    ^^^^^^^^^^^^^^^^
-AttributeError: 'FileHost' object has no attribute 'rollback'
+test_rollback_before_any_operation_empties_everything (__main__.TestLevel5.test_rollback_before_any_operation_empties_everything) ... ok
+test_rollback_covers_level_one_operations (__main__.TestLevel5.test_rollback_covers_level_one_operations) ... ok
+test_rollback_lands_on_an_exact_operation_timestamp (__main__.TestLevel5.test_rollback_lands_on_an_exact_operation_timestamp) ... ok
+test_rollback_preserves_absolute_expiry (__main__.TestLevel5.test_rollback_preserves_absolute_expiry) ... ok
+test_rollback_removes_later_uploads (__main__.TestLevel5.test_rollback_removes_later_uploads) ... ok
+test_rollback_truncates_history (__main__.TestLevel5.test_rollback_truncates_history) ... ok
+test_rollback_undoes_users_and_merges (__main__.TestLevel5.test_rollback_undoes_users_and_merges) ... ok
 
 ----------------------------------------------------------------------
 Ran 37 tests in 0.002s
 
-FAILED (errors=7)
+OK
