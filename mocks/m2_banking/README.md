@@ -38,41 +38,6 @@ All amounts are integers. Balances can never go negative.
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Level 3 — Refactoring & encapsulation
 
 Accounts can now make payments that earn cashback.
@@ -96,6 +61,51 @@ Cashback lands exactly at `payment_timestamp + 86400000`; an operation at that
 timestamp sees it as already credited.
 
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Level 4 — Extending design & functionality
 
