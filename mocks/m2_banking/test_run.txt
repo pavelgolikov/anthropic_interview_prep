@@ -1,0 +1,228 @@
+test_create_account (__main__.TestLevel1.test_create_account) ... ok
+test_deposit_returns_new_balance (__main__.TestLevel1.test_deposit_returns_new_balance) ... ok
+test_deposit_to_missing_account (__main__.TestLevel1.test_deposit_to_missing_account) ... ok
+test_new_account_starts_empty (__main__.TestLevel1.test_new_account_starts_empty) ... ok
+test_transfer_insufficient_funds_is_a_noop (__main__.TestLevel1.test_transfer_insufficient_funds_is_a_noop) ... ok
+test_transfer_missing_accounts (__main__.TestLevel1.test_transfer_missing_accounts) ... ok
+test_transfer_returns_source_balance (__main__.TestLevel1.test_transfer_returns_source_balance) ... ok
+test_transfer_to_self_is_rejected (__main__.TestLevel1.test_transfer_to_self_is_rejected) ... ok
+test_incoming_does_not_reduce_outgoing (__main__.TestLevel2.test_incoming_does_not_reduce_outgoing) ... ok
+test_limit_is_respected (__main__.TestLevel2.test_limit_is_respected) ... ok
+test_n_larger_than_account_count (__main__.TestLevel2.test_n_larger_than_account_count) ... ok
+test_ranks_by_outgoing_desc (__main__.TestLevel2.test_ranks_by_outgoing_desc) ... ok
+test_ties_broken_by_account_id_asc (__main__.TestLevel2.test_ties_broken_by_account_id_asc) ... ok
+test_cashback_does_not_earn_cashback (__main__.TestLevel3.test_cashback_does_not_earn_cashback) ... ERROR
+test_cashback_is_floored (__main__.TestLevel3.test_cashback_is_floored) ... ERROR
+test_cashback_lands_after_exactly_one_day (__main__.TestLevel3.test_cashback_lands_after_exactly_one_day) ... ERROR
+test_pay_rejects_missing_account_and_overdraft (__main__.TestLevel3.test_pay_rejects_missing_account_and_overdraft) ... ERROR
+test_pay_returns_sequential_ids (__main__.TestLevel3.test_pay_returns_sequential_ids) ... ERROR
+test_pay_withdraws_immediately (__main__.TestLevel3.test_pay_withdraws_immediately) ... ERROR
+test_payment_status (__main__.TestLevel3.test_payment_status) ... ERROR
+test_payment_status_rejects_wrong_owner_or_unknown_ids (__main__.TestLevel3.test_payment_status_rejects_wrong_owner_or_unknown_ids) ... ERROR
+test_payments_count_as_outgoing (__main__.TestLevel3.test_payments_count_as_outgoing) ... ERROR
+test_merge_rejects_bad_arguments (__main__.TestLevel4.test_merge_rejects_bad_arguments) ... ERROR
+test_merge_sums_balances (__main__.TestLevel4.test_merge_sums_balances) ... ERROR
+test_merge_sums_outgoing (__main__.TestLevel4.test_merge_sums_outgoing) ... ERROR
+test_merged_account_disappears (__main__.TestLevel4.test_merged_account_disappears) ... ERROR
+test_payment_status_moves_to_the_surviving_account (__main__.TestLevel4.test_payment_status_moves_to_the_surviving_account) ... ERROR
+test_pending_cashback_follows_the_merge (__main__.TestLevel4.test_pending_cashback_follows_the_merge) ... ERROR
+test_balance_before_creation_is_none (__main__.TestLevel5.test_balance_before_creation_is_none) ... ERROR
+test_balance_walks_the_history (__main__.TestLevel5.test_balance_walks_the_history) ... ERROR
+test_cashback_appears_at_its_landing_time (__main__.TestLevel5.test_cashback_appears_at_its_landing_time) ... ERROR
+test_merged_account_history_survives_until_the_merge (__main__.TestLevel5.test_merged_account_history_survives_until_the_merge) ... ERROR
+test_transfers_appear_on_both_sides (__main__.TestLevel5.test_transfers_appear_on_both_sides) ... ERROR
+test_unknown_account (__main__.TestLevel5.test_unknown_account) ... ERROR
+
+======================================================================
+ERROR: test_cashback_does_not_earn_cashback (__main__.TestLevel3.test_cashback_does_not_earn_cashback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 144, in test_cashback_does_not_earn_cashback
+    self.bank.pay(2, "alice", 10_000)  # cashback 200
+    ^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'pay'
+
+======================================================================
+ERROR: test_cashback_is_floored (__main__.TestLevel3.test_cashback_is_floored)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 117, in test_cashback_is_floored
+    self.bank.pay(2, "alice", 149)  # 2% of 149 = 2.98 -> 2
+    ^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'pay'
+
+======================================================================
+ERROR: test_cashback_lands_after_exactly_one_day (__main__.TestLevel3.test_cashback_lands_after_exactly_one_day)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 112, in test_cashback_lands_after_exactly_one_day
+    self.bank.pay(2, "alice", 1_000)  # 2% of 1000 = 20
+    ^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'pay'
+
+======================================================================
+ERROR: test_pay_rejects_missing_account_and_overdraft (__main__.TestLevel3.test_pay_rejects_missing_account_and_overdraft)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 107, in test_pay_rejects_missing_account_and_overdraft
+    self.assertIsNone(self.bank.pay(2, "ghost", 1))
+                      ^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'pay'
+
+======================================================================
+ERROR: test_pay_returns_sequential_ids (__main__.TestLevel3.test_pay_returns_sequential_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 99, in test_pay_returns_sequential_ids
+    self.assertEqual(self.bank.pay(2, "alice", 100), "payment1")
+                     ^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'pay'
+
+======================================================================
+ERROR: test_pay_withdraws_immediately (__main__.TestLevel3.test_pay_withdraws_immediately)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 103, in test_pay_withdraws_immediately
+    self.bank.pay(2, "alice", 100)
+    ^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'pay'
+
+======================================================================
+ERROR: test_payment_status (__main__.TestLevel3.test_payment_status)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 121, in test_payment_status
+    pid = self.bank.pay(2, "alice", 1_000)
+          ^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'pay'
+
+======================================================================
+ERROR: test_payment_status_rejects_wrong_owner_or_unknown_ids (__main__.TestLevel3.test_payment_status_rejects_wrong_owner_or_unknown_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 129, in test_payment_status_rejects_wrong_owner_or_unknown_ids
+    pid = self.bank.pay(2, "alice", 100)
+          ^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'pay'
+
+======================================================================
+ERROR: test_payments_count_as_outgoing (__main__.TestLevel3.test_payments_count_as_outgoing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 137, in test_payments_count_as_outgoing
+    self.bank.pay(2, "alice", 500)
+    ^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'pay'
+
+======================================================================
+ERROR: test_merge_rejects_bad_arguments (__main__.TestLevel4.test_merge_rejects_bad_arguments)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 167, in test_merge_rejects_bad_arguments
+    self.assertFalse(self.bank.merge_accounts(2, "alice", "alice"))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'merge_accounts'. Did you mean: 'create_account'?
+
+======================================================================
+ERROR: test_merge_sums_balances (__main__.TestLevel4.test_merge_sums_balances)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 157, in test_merge_sums_balances
+    self.assertTrue(self.bank.merge_accounts(2, "alice", "bob"))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'merge_accounts'. Did you mean: 'create_account'?
+
+======================================================================
+ERROR: test_merge_sums_outgoing (__main__.TestLevel4.test_merge_sums_outgoing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 175, in test_merge_sums_outgoing
+    self.bank.merge_accounts(3, "alice", "bob")
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'merge_accounts'. Did you mean: 'create_account'?
+
+======================================================================
+ERROR: test_merged_account_disappears (__main__.TestLevel4.test_merged_account_disappears)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 161, in test_merged_account_disappears
+    self.bank.merge_accounts(2, "alice", "bob")
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'merge_accounts'. Did you mean: 'create_account'?
+
+======================================================================
+ERROR: test_payment_status_moves_to_the_surviving_account (__main__.TestLevel4.test_payment_status_moves_to_the_surviving_account)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 187, in test_payment_status_moves_to_the_surviving_account
+    pid = self.bank.pay(2, "bob", 500)
+          ^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'pay'
+
+======================================================================
+ERROR: test_pending_cashback_follows_the_merge (__main__.TestLevel4.test_pending_cashback_follows_the_merge)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 181, in test_pending_cashback_follows_the_merge
+    self.bank.pay(2, "bob", 500)  # cashback 10, due at 2 + DAY
+    ^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'pay'
+
+======================================================================
+ERROR: test_balance_before_creation_is_none (__main__.TestLevel5.test_balance_before_creation_is_none)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 203, in test_balance_before_creation_is_none
+    self.assertIsNone(self.bank.get_balance(100, "alice", 9))
+                      ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'get_balance'
+
+======================================================================
+ERROR: test_balance_walks_the_history (__main__.TestLevel5.test_balance_walks_the_history)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 212, in test_balance_walks_the_history
+    self.assertEqual(self.bank.get_balance(100, "alice", 19), 0)
+                     ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'get_balance'
+
+======================================================================
+ERROR: test_cashback_appears_at_its_landing_time (__main__.TestLevel5.test_cashback_appears_at_its_landing_time)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 227, in test_cashback_appears_at_its_landing_time
+    self.bank.pay(30, "alice", 1_000)  # cashback 20 at 30 + DAY
+    ^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'pay'
+
+======================================================================
+ERROR: test_merged_account_history_survives_until_the_merge (__main__.TestLevel5.test_merged_account_history_survives_until_the_merge)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 235, in test_merged_account_history_survives_until_the_merge
+    self.bank.merge_accounts(50, "alice", "bob")
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'merge_accounts'. Did you mean: 'create_account'?
+
+======================================================================
+ERROR: test_transfers_appear_on_both_sides (__main__.TestLevel5.test_transfers_appear_on_both_sides)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 221, in test_transfers_appear_on_both_sides
+    self.assertEqual(self.bank.get_balance(100, "alice", 30), 60)
+                     ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'get_balance'
+
+======================================================================
+ERROR: test_unknown_account (__main__.TestLevel5.test_unknown_account)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 207, in test_unknown_account
+    self.assertIsNone(self.bank.get_balance(100, "ghost", 50))
+                      ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'get_balance'
+
+----------------------------------------------------------------------
+Ran 34 tests in 0.003s
+
+FAILED (errors=21)

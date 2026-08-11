@@ -38,6 +38,41 @@ All amounts are integers. Balances can never go negative.
 
 ---
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Level 3 — Refactoring & encapsulation
 
 Accounts can now make payments that earn cashback.
