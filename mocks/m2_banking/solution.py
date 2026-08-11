@@ -1,25 +1,40 @@
 """Mock 2 — Banking System.  Implement Bank here."""
 
+import bisect
+import copy
+
 class Bank:
     def __init__(self):
         self.accounts = {} # account_id : {"timestamp": int, "balance": int, "total_outgoing" int}
         self.payment_ind = 0
         self.payments = {}  # payment_id : {"timestamp": int, "account_id": str, "amount": int, "cb_due" due time, "status": "IN_PROGRESS" or "CASHBACK_RECEIVED"}
+        self.timestamps = [0]
+        self.snaps = [{}]
 
     def create_account(self, timestamp, account_id):
         if account_id in self.accounts.keys():
             return False
         # create the account with 0 balance
         self.accounts[account_id] = {"timestamp": timestamp, "balance": 0, "total_outgoing": 0}
+        self._set_balance(timestamp, account_id, 0, 'creation')
         return True
     
 
     # HELPERS -------------------------------------------------------------------
+    def _take_snap(self, timestamp):
+        if len(self.timestamps) > 0 and timestamp == self.timestamps[-1]:
+            self.snaps[-1] = copy.deepcopy(self.accounts)
+        else:
+            self.timestamps.append(timestamp)
+            self.snaps.append(copy.deepcopy(self.accounts))
+        return None
+
     def _set_balance(self, timestamp, account_id, new_balance, reason):
         if reason == 'transfer_out' or reason == 'payment':
             old_balance = self.accounts[account_id]['balance']
             self.accounts[account_id]['total_outgoing'] += (old_balance - new_balance)
         self.accounts[account_id]['balance'] = new_balance
+        self._take_snap(timestamp)
         return None
 
     def _fast_forward(self, timestamp):
@@ -29,7 +44,7 @@ class Bank:
         for cb in due_cb:
             cb_amount = cb['amount'] * 2 // 100
             new_balance = self.accounts[cb['account_id']]['balance'] + cb_amount
-            self._set_balance(timestamp, cb['account_id'], new_balance, 'cashback')
+            self._set_balance(cb['cb_due'], cb['account_id'], new_balance, 'cashback')
             cb['status'] = "CASHBACK_RECEIVED"
 
 
@@ -104,7 +119,6 @@ class Bank:
         
         self.accounts[account_id_1]['balance'] += self.accounts[account_id_2]['balance']
         self.accounts[account_id_1]['total_outgoing'] += self.accounts[account_id_2]['total_outgoing']
-        
         del self.accounts[account_id_2]
         
         # rename all payments made by account 2 in self.payments to account 1
@@ -112,4 +126,27 @@ class Bank:
             if pmnt['account_id'] == account_id_2:
                 pmnt['account_id'] = account_id_1
         
+        self._take_snap(timestamp)
         return True
+
+    # L4 -----------------------------------------------------------------------
+    
+    def get_balance(self, timestamp, account_id, time_at):
+        self._fast_forward(timestamp)
+        if len(self.timestamps) > 0 and time_at < timestamp:
+            i = bisect.bisect_right(self.timestamps, time_at) - 1
+            accs_at_time = self.snaps[i]
+        else:
+            accs_at_time = self.accounts
+        if account_id not in accs_at_time.keys():
+            return None
+        return accs_at_time[account_id]['balance']
+        
+
+# - `get_balance(timestamp, account_id, time_at)`
+#   - Returns the account's balance as it was at `time_at`. `time_at <= timestamp`.
+#   - Cashback that had landed by `time_at` is included; cashback that lands later
+#     is not.
+#   - An account that was merged away is still queryable for any `time_at`
+#     **strictly before** the merge, and returns `None` from the merge timestamp
+#     onward.

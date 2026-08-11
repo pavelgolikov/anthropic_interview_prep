@@ -62,6 +62,19 @@ timestamp sees it as already credited.
 
 ---
 
+## Level 4 — Extending design & functionality
+
+- `merge_accounts(timestamp, account_id_1, account_id_2)`
+  - Merges `account_id_2` into `account_id_1`. Returns `True` on success, `False`
+    if either account does not exist or the two ids are equal.
+  - Balances are summed into `account_id_1`; `total_outgoing` is summed too.
+  - `account_id_2` ceases to exist. Operations on it afterwards behave as if it
+    never existed.
+  - Cashback still pending for `account_id_2` is credited to `account_id_1` when
+    it lands.
+  - Payments made by `account_id_2` remain queryable, but now under
+    `account_id_1`.
+
 ---
 
 ## Level 5 — Historical balances
