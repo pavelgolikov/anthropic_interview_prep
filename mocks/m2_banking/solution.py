@@ -2,7 +2,7 @@
 
 class Bank:
     def __init__(self):
-        self.accounts = {} # account_id : {"timestamp": int, "balance": int, "total_spending" int}
+        self.accounts = {} # account_id : {"timestamp": int, "balance": int, "total_outgoing" int}
         self.payment_ind = 0
         self.payments = {}  # payment_id : {"timestamp": int, "account_id": str, "amount": int, "cb_due" due time, "status": "IN_PROGRESS" or "CASHBACK_RECEIVED"}
 
@@ -10,7 +10,7 @@ class Bank:
         if account_id in self.accounts.keys():
             return False
         # create the account with 0 balance
-        self.accounts[account_id] = {"timestamp": timestamp, "balance": 0, "total_spending": 0}
+        self.accounts[account_id] = {"timestamp": timestamp, "balance": 0, "total_outgoing": 0}
         return True
     
 
@@ -18,7 +18,7 @@ class Bank:
     def _set_balance(self, timestamp, account_id, new_balance, reason):
         if reason == 'transfer_out' or reason == 'payment':
             old_balance = self.accounts[account_id]['balance']
-            self.accounts[account_id]['total_spending'] += (old_balance - new_balance)
+            self.accounts[account_id]['total_outgoing'] += (old_balance - new_balance)
         self.accounts[account_id]['balance'] = new_balance
         return None
 
@@ -63,7 +63,7 @@ class Bank:
     def top_spenders(self, timestamp, n):
         self._fast_forward(timestamp)
         # want pairs (total_spent, account_id)
-        pairs = [(v['total_spending'], k) for k, v in self.accounts.items()]
+        pairs = [(v['total_outgoing'], k) for k, v in self.accounts.items()]
         pairs_sorted = sorted(pairs, key=lambda p: (-p[0], p[1]))[:n]
         top_spender_list_strings = [f"{x[1]}({x[0]})" for x in pairs_sorted]
         return top_spender_list_strings
@@ -94,3 +94,22 @@ class Bank:
         if payment in self.payments and account_id != self.payments[payment]['account_id']:
             return None
         return self.payments[payment]['status']
+
+
+    # L4 -----------------------------------------------------------------------
+    def merge_accounts(self, timestamp, account_id_1, account_id_2):
+        self._fast_forward(timestamp)
+        if account_id_1 == account_id_2 or account_id_1 not in self.accounts or account_id_2 not in self.accounts:
+            return False
+        
+        self.accounts[account_id_1]['balance'] += self.accounts[account_id_2]['balance']
+        self.accounts[account_id_1]['total_outgoing'] += self.accounts[account_id_2]['total_outgoing']
+        
+        del self.accounts[account_id_2]
+        
+        # rename all payments made by account 2 in self.payments to account 1
+        for pmnt in self.payments.values():
+            if pmnt['account_id'] == account_id_2:
+                pmnt['account_id'] = account_id_1
+        
+        return True

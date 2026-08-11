@@ -20,72 +20,18 @@ test_pay_withdraws_immediately (__main__.TestLevel3.test_pay_withdraws_immediate
 test_payment_status (__main__.TestLevel3.test_payment_status) ... ok
 test_payment_status_rejects_wrong_owner_or_unknown_ids (__main__.TestLevel3.test_payment_status_rejects_wrong_owner_or_unknown_ids) ... ok
 test_payments_count_as_outgoing (__main__.TestLevel3.test_payments_count_as_outgoing) ... ok
-test_merge_rejects_bad_arguments (__main__.TestLevel4.test_merge_rejects_bad_arguments) ... ERROR
-test_merge_sums_balances (__main__.TestLevel4.test_merge_sums_balances) ... ERROR
-test_merge_sums_outgoing (__main__.TestLevel4.test_merge_sums_outgoing) ... ERROR
-test_merged_account_disappears (__main__.TestLevel4.test_merged_account_disappears) ... ERROR
-test_payment_status_moves_to_the_surviving_account (__main__.TestLevel4.test_payment_status_moves_to_the_surviving_account) ... ERROR
-test_pending_cashback_follows_the_merge (__main__.TestLevel4.test_pending_cashback_follows_the_merge) ... ERROR
+test_merge_rejects_bad_arguments (__main__.TestLevel4.test_merge_rejects_bad_arguments) ... ok
+test_merge_sums_balances (__main__.TestLevel4.test_merge_sums_balances) ... ok
+test_merge_sums_outgoing (__main__.TestLevel4.test_merge_sums_outgoing) ... ok
+test_merged_account_disappears (__main__.TestLevel4.test_merged_account_disappears) ... ok
+test_payment_status_moves_to_the_surviving_account (__main__.TestLevel4.test_payment_status_moves_to_the_surviving_account) ... ok
+test_pending_cashback_follows_the_merge (__main__.TestLevel4.test_pending_cashback_follows_the_merge) ... ok
 test_balance_before_creation_is_none (__main__.TestLevel5.test_balance_before_creation_is_none) ... ERROR
 test_balance_walks_the_history (__main__.TestLevel5.test_balance_walks_the_history) ... ERROR
 test_cashback_appears_at_its_landing_time (__main__.TestLevel5.test_cashback_appears_at_its_landing_time) ... ERROR
 test_merged_account_history_survives_until_the_merge (__main__.TestLevel5.test_merged_account_history_survives_until_the_merge) ... ERROR
 test_transfers_appear_on_both_sides (__main__.TestLevel5.test_transfers_appear_on_both_sides) ... ERROR
 test_unknown_account (__main__.TestLevel5.test_unknown_account) ... ERROR
-
-======================================================================
-ERROR: test_merge_rejects_bad_arguments (__main__.TestLevel4.test_merge_rejects_bad_arguments)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 167, in test_merge_rejects_bad_arguments
-    self.assertFalse(self.bank.merge_accounts(2, "alice", "alice"))
-                     ^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'Bank' object has no attribute 'merge_accounts'. Did you mean: 'create_account'?
-
-======================================================================
-ERROR: test_merge_sums_balances (__main__.TestLevel4.test_merge_sums_balances)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 157, in test_merge_sums_balances
-    self.assertTrue(self.bank.merge_accounts(2, "alice", "bob"))
-                    ^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'Bank' object has no attribute 'merge_accounts'. Did you mean: 'create_account'?
-
-======================================================================
-ERROR: test_merge_sums_outgoing (__main__.TestLevel4.test_merge_sums_outgoing)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 175, in test_merge_sums_outgoing
-    self.bank.merge_accounts(3, "alice", "bob")
-    ^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'Bank' object has no attribute 'merge_accounts'. Did you mean: 'create_account'?
-
-======================================================================
-ERROR: test_merged_account_disappears (__main__.TestLevel4.test_merged_account_disappears)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 161, in test_merged_account_disappears
-    self.bank.merge_accounts(2, "alice", "bob")
-    ^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'Bank' object has no attribute 'merge_accounts'. Did you mean: 'create_account'?
-
-======================================================================
-ERROR: test_payment_status_moves_to_the_surviving_account (__main__.TestLevel4.test_payment_status_moves_to_the_surviving_account)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 188, in test_payment_status_moves_to_the_surviving_account
-    self.bank.merge_accounts(3, "alice", "bob")
-    ^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'Bank' object has no attribute 'merge_accounts'. Did you mean: 'create_account'?
-
-======================================================================
-ERROR: test_pending_cashback_follows_the_merge (__main__.TestLevel4.test_pending_cashback_follows_the_merge)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 182, in test_pending_cashback_follows_the_merge
-    self.bank.merge_accounts(3, "alice", "bob")
-    ^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'Bank' object has no attribute 'merge_accounts'. Did you mean: 'create_account'?
 
 ======================================================================
 ERROR: test_balance_before_creation_is_none (__main__.TestLevel5.test_balance_before_creation_is_none)
@@ -118,10 +64,10 @@ AttributeError: 'Bank' object has no attribute 'get_balance'
 ERROR: test_merged_account_history_survives_until_the_merge (__main__.TestLevel5.test_merged_account_history_survives_until_the_merge)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 235, in test_merged_account_history_survives_until_the_merge
-    self.bank.merge_accounts(50, "alice", "bob")
-    ^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'Bank' object has no attribute 'merge_accounts'. Did you mean: 'create_account'?
+  File "/home/golikovp/anthropic_interview_prep/mocks/m2_banking/test_solution.py", line 236, in test_merged_account_history_survives_until_the_merge
+    self.assertEqual(self.bank.get_balance(100, "bob", 49), 700)
+                     ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Bank' object has no attribute 'get_balance'
 
 ======================================================================
 ERROR: test_transfers_appear_on_both_sides (__main__.TestLevel5.test_transfers_appear_on_both_sides)
@@ -142,6 +88,6 @@ Traceback (most recent call last):
 AttributeError: 'Bank' object has no attribute 'get_balance'
 
 ----------------------------------------------------------------------
-Ran 34 tests in 0.003s
+Ran 34 tests in 0.002s
 
-FAILED (errors=12)
+FAILED (errors=6)
