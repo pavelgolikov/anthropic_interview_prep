@@ -26,98 +26,17 @@ test_restore_drops_data_added_after_the_backup (__main__.TestLevel4.test_restore
 test_restore_picks_the_latest_backup_at_or_before (__main__.TestLevel4.test_restore_picks_the_latest_backup_at_or_before) ... ok
 test_restore_with_no_backup_empties_the_database (__main__.TestLevel4.test_restore_with_no_backup_empties_the_database) ... ok
 test_ttl_is_rebased_on_the_restore_time (__main__.TestLevel4.test_ttl_is_rebased_on_the_restore_time) ... ok
-test_abort_discards_writes (__main__.TestLevel5.test_abort_discards_writes) ... ERROR
-test_abort_restores_overwritten_values (__main__.TestLevel5.test_abort_restores_overwritten_values) ... ERROR
-test_abort_return_values (__main__.TestLevel5.test_abort_return_values) ... ERROR
-test_abort_undoes_deletes (__main__.TestLevel5.test_abort_undoes_deletes) ... ERROR
-test_begin_and_commit_return_values (__main__.TestLevel5.test_begin_and_commit_return_values) ... ERROR
-test_commit_persists (__main__.TestLevel5.test_commit_persists) ... ERROR
-test_reads_see_uncommitted_writes (__main__.TestLevel5.test_reads_see_uncommitted_writes) ... ERROR
-test_transactions_can_be_reused (__main__.TestLevel5.test_transactions_can_be_reused) ... ERROR
-test_ttls_set_inside_a_transaction_survive_commit (__main__.TestLevel5.test_ttls_set_inside_a_transaction_survive_commit) ... ERROR
-
-======================================================================
-ERROR: test_abort_discards_writes (__main__.TestLevel5.test_abort_discards_writes)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m3_memory_db/test_solution.py", line 219, in test_abort_discards_writes
-    self.db.begin(1)
-    ^^^^^^^^^^^^^
-AttributeError: 'MemoryDB' object has no attribute 'begin'
-
-======================================================================
-ERROR: test_abort_restores_overwritten_values (__main__.TestLevel5.test_abort_restores_overwritten_values)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m3_memory_db/test_solution.py", line 226, in test_abort_restores_overwritten_values
-    self.db.begin(1)
-    ^^^^^^^^^^^^^
-AttributeError: 'MemoryDB' object has no attribute 'begin'
-
-======================================================================
-ERROR: test_abort_return_values (__main__.TestLevel5.test_abort_return_values)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m3_memory_db/test_solution.py", line 201, in test_abort_return_values
-    self.assertFalse(self.db.abort(1))
-                     ^^^^^^^^^^^^^
-AttributeError: 'MemoryDB' object has no attribute 'abort'
-
-======================================================================
-ERROR: test_abort_undoes_deletes (__main__.TestLevel5.test_abort_undoes_deletes)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m3_memory_db/test_solution.py", line 233, in test_abort_undoes_deletes
-    self.db.begin(1)
-    ^^^^^^^^^^^^^
-AttributeError: 'MemoryDB' object has no attribute 'begin'
-
-======================================================================
-ERROR: test_begin_and_commit_return_values (__main__.TestLevel5.test_begin_and_commit_return_values)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m3_memory_db/test_solution.py", line 195, in test_begin_and_commit_return_values
-    self.assertTrue(self.db.begin(1))
-                    ^^^^^^^^^^^^^
-AttributeError: 'MemoryDB' object has no attribute 'begin'
-
-======================================================================
-ERROR: test_commit_persists (__main__.TestLevel5.test_commit_persists)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m3_memory_db/test_solution.py", line 213, in test_commit_persists
-    self.db.begin(1)
-    ^^^^^^^^^^^^^
-AttributeError: 'MemoryDB' object has no attribute 'begin'
-
-======================================================================
-ERROR: test_reads_see_uncommitted_writes (__main__.TestLevel5.test_reads_see_uncommitted_writes)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m3_memory_db/test_solution.py", line 207, in test_reads_see_uncommitted_writes
-    self.db.begin(1)
-    ^^^^^^^^^^^^^
-AttributeError: 'MemoryDB' object has no attribute 'begin'
-
-======================================================================
-ERROR: test_transactions_can_be_reused (__main__.TestLevel5.test_transactions_can_be_reused)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m3_memory_db/test_solution.py", line 247, in test_transactions_can_be_reused
-    self.db.begin(1)
-    ^^^^^^^^^^^^^
-AttributeError: 'MemoryDB' object has no attribute 'begin'
-
-======================================================================
-ERROR: test_ttls_set_inside_a_transaction_survive_commit (__main__.TestLevel5.test_ttls_set_inside_a_transaction_survive_commit)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/golikovp/anthropic_interview_prep/mocks/m3_memory_db/test_solution.py", line 240, in test_ttls_set_inside_a_transaction_survive_commit
-    self.db.begin(0)
-    ^^^^^^^^^^^^^
-AttributeError: 'MemoryDB' object has no attribute 'begin'
+test_abort_discards_writes (__main__.TestLevel5.test_abort_discards_writes) ... ok
+test_abort_restores_overwritten_values (__main__.TestLevel5.test_abort_restores_overwritten_values) ... ok
+test_abort_return_values (__main__.TestLevel5.test_abort_return_values) ... ok
+test_abort_undoes_deletes (__main__.TestLevel5.test_abort_undoes_deletes) ... ok
+test_begin_and_commit_return_values (__main__.TestLevel5.test_begin_and_commit_return_values) ... ok
+test_commit_persists (__main__.TestLevel5.test_commit_persists) ... ok
+test_reads_see_uncommitted_writes (__main__.TestLevel5.test_reads_see_uncommitted_writes) ... ok
+test_transactions_can_be_reused (__main__.TestLevel5.test_transactions_can_be_reused) ... ok
+test_ttls_set_inside_a_transaction_survive_commit (__main__.TestLevel5.test_ttls_set_inside_a_transaction_survive_commit) ... ok
 
 ----------------------------------------------------------------------
-Ran 37 tests in 0.002s
+Ran 37 tests in 0.001s
 
-FAILED (errors=9)
+OK

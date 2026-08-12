@@ -9,6 +9,7 @@ class MemoryDB:
         self.db = {} # key: {field: {"value": value, "expires": expiry timestamp}}
         self.timestamps = []
         self.backups = []
+        self.stash = None
     
     def _alive(self, db, key, field, timestamp):
         if db[key][field]["expires"] is None:
@@ -32,6 +33,7 @@ class MemoryDB:
         return self.set_at(0, key, field, value)
 
     def get_at(self, timestamp, key, field):
+        # db = (self.db if self.stash == None else self.stash)
         if key not in self.db or (key in self.db and field not in self.db[key]):
             return None
         if not self._alive(self.db, key, field, timestamp):
@@ -53,6 +55,7 @@ class MemoryDB:
         return self.delete_at(0, key, field)
         
     def scan_by_prefix_at(self, timestamp, key, prefix):
+        # db = (self.db if self.stash == None else self.stash)
         if key not in self.db:
             return []
         pairs = [(fld,v) for fld, v in self.db[key].items() if self._alive(self.db, key, fld, timestamp)]
@@ -96,6 +99,25 @@ class MemoryDB:
                     remaining_life = f['expires'] - timestamp_to_restore
                     f["expires"] = timestamp + remaining_life
         return None
+    
+    def begin(self, timestamp):
+        if self.stash == None:
+            self.stash = copy.deepcopy(self.db)
+            return True
+        return False
+    
+    def commit(self, timestamp):
+        if self.stash == None:
+            return False
+        self.stash = None
+        return True
+    
+    def abort(self, timestamp):
+        if self.stash == None:
+            return False
+        self.db = self.stash
+        self.stash = None
+        return True
         
 
 
