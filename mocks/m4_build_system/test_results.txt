@@ -1,0 +1,222 @@
+test_add_dependency (__main__.TestLevel1.test_add_dependency) ... ok
+test_add_task (__main__.TestLevel1.test_add_task) ... ok
+test_dependency_requires_both_tasks (__main__.TestLevel1.test_dependency_requires_both_tasks) ... ok
+test_direct_cycle_rejected (__main__.TestLevel1.test_direct_cycle_rejected) ... ok
+test_duplicate_dependency_rejected (__main__.TestLevel1.test_duplicate_dependency_rejected) ... ok
+test_get_duration_missing (__main__.TestLevel1.test_get_duration_missing) ... ok
+test_self_dependency_rejected (__main__.TestLevel1.test_self_dependency_rejected) ... ok
+test_transitive_cycle_rejected (__main__.TestLevel1.test_transitive_cycle_rejected) ... ok
+test_zero_duration_task (__main__.TestLevel1.test_zero_duration_task) ... ok
+test_caps_at_ten (__main__.TestLevel2.test_caps_at_ten) ... ok
+test_orders_by_duration_desc (__main__.TestLevel2.test_orders_by_duration_desc) ... ok
+test_prefix_filters (__main__.TestLevel2.test_prefix_filters) ... ok
+test_ties_by_id_asc (__main__.TestLevel2.test_ties_by_id_asc) ... ok
+test_earliest_finish_chain (__main__.TestLevel3.test_earliest_finish_chain) ... ERROR
+test_earliest_finish_missing_task (__main__.TestLevel3.test_earliest_finish_missing_task) ... ERROR
+test_earliest_finish_takes_the_slowest_dependency (__main__.TestLevel3.test_earliest_finish_takes_the_slowest_dependency) ... ERROR
+test_run_order_empty (__main__.TestLevel3.test_run_order_empty) ... ok
+test_run_order_no_dependencies_is_sorted (__main__.TestLevel3.test_run_order_no_dependencies_is_sorted) ... ok
+test_run_order_respects_dependencies (__main__.TestLevel3.test_run_order_respects_dependencies) ... ok
+test_run_order_tie_break_is_smallest_id (__main__.TestLevel3.test_run_order_tie_break_is_smallest_id) ... ok
+test_cached_task_costs_nothing (__main__.TestLevel4.test_cached_task_costs_nothing) ... ERROR
+test_cached_tasks_still_appear_in_run_order (__main__.TestLevel4.test_cached_tasks_still_appear_in_run_order) ... ERROR
+test_invalidate_cascades_downstream (__main__.TestLevel4.test_invalidate_cascades_downstream) ... ERROR
+test_invalidate_does_not_touch_upstream (__main__.TestLevel4.test_invalidate_does_not_touch_upstream) ... ERROR
+test_invalidate_missing_task (__main__.TestLevel4.test_invalidate_missing_task) ... ERROR
+test_invalidate_reports_only_what_was_cached (__main__.TestLevel4.test_invalidate_reports_only_what_was_cached) ... ERROR
+test_mark_cached (__main__.TestLevel4.test_mark_cached) ... ERROR
+test_mark_cached_again_after_invalidate (__main__.TestLevel4.test_mark_cached_again_after_invalidate) ... ERROR
+test_cached_dependency_unblocks_immediately (__main__.TestLevel5.test_cached_dependency_unblocks_immediately) ... ERROR
+test_cached_tasks_take_no_time_and_free_the_worker (__main__.TestLevel5.test_cached_tasks_take_no_time_and_free_the_worker) ... ERROR
+test_dependencies_serialise_the_build (__main__.TestLevel5.test_dependencies_serialise_the_build) ... ERROR
+test_diamond (__main__.TestLevel5.test_diamond) ... ERROR
+test_independent_tasks_share_workers (__main__.TestLevel5.test_independent_tasks_share_workers) ... ERROR
+test_more_workers_than_tasks (__main__.TestLevel5.test_more_workers_than_tasks) ... ERROR
+test_no_tasks (__main__.TestLevel5.test_no_tasks) ... ERROR
+test_single_worker_is_the_total_duration (__main__.TestLevel5.test_single_worker_is_the_total_duration) ... ERROR
+test_smallest_ready_id_wins_a_free_worker (__main__.TestLevel5.test_smallest_ready_id_wins_a_free_worker) ... ERROR
+
+======================================================================
+ERROR: test_earliest_finish_chain (__main__.TestLevel3.test_earliest_finish_chain)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 114, in test_earliest_finish_chain
+    self.assertEqual(self.bs.earliest_finish("a"), 3)
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'earliest_finish'
+
+======================================================================
+ERROR: test_earliest_finish_missing_task (__main__.TestLevel3.test_earliest_finish_missing_task)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 125, in test_earliest_finish_missing_task
+    self.assertIsNone(self.bs.earliest_finish("nope"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'earliest_finish'
+
+======================================================================
+ERROR: test_earliest_finish_takes_the_slowest_dependency (__main__.TestLevel3.test_earliest_finish_takes_the_slowest_dependency)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 122, in test_earliest_finish_takes_the_slowest_dependency
+    self.assertEqual(self.bs.earliest_finish("join"), 12)
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'earliest_finish'
+
+======================================================================
+ERROR: test_cached_task_costs_nothing (__main__.TestLevel4.test_cached_task_costs_nothing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 141, in test_cached_task_costs_nothing
+    self.bs.mark_cached("a")
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'mark_cached'
+
+======================================================================
+ERROR: test_cached_tasks_still_appear_in_run_order (__main__.TestLevel4.test_cached_tasks_still_appear_in_run_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 147, in test_cached_tasks_still_appear_in_run_order
+    self.bs.mark_cached("a")
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'mark_cached'
+
+======================================================================
+ERROR: test_invalidate_cascades_downstream (__main__.TestLevel4.test_invalidate_cascades_downstream)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 152, in test_invalidate_cascades_downstream
+    self.bs.mark_cached(task)
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'mark_cached'
+
+======================================================================
+ERROR: test_invalidate_does_not_touch_upstream (__main__.TestLevel4.test_invalidate_does_not_touch_upstream)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 158, in test_invalidate_does_not_touch_upstream
+    self.bs.mark_cached("a")
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'mark_cached'
+
+======================================================================
+ERROR: test_invalidate_missing_task (__main__.TestLevel4.test_invalidate_missing_task)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 169, in test_invalidate_missing_task
+    self.assertListEqual(self.bs.invalidate("nope"), [])
+                         ^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'invalidate'
+
+======================================================================
+ERROR: test_invalidate_reports_only_what_was_cached (__main__.TestLevel4.test_invalidate_reports_only_what_was_cached)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 164, in test_invalidate_reports_only_what_was_cached
+    self.bs.mark_cached("c")
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'mark_cached'
+
+======================================================================
+ERROR: test_mark_cached (__main__.TestLevel4.test_mark_cached)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 136, in test_mark_cached
+    self.assertTrue(self.bs.mark_cached("a"))
+                    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'mark_cached'
+
+======================================================================
+ERROR: test_mark_cached_again_after_invalidate (__main__.TestLevel4.test_mark_cached_again_after_invalidate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 172, in test_mark_cached_again_after_invalidate
+    self.bs.mark_cached("a")
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'mark_cached'
+
+======================================================================
+ERROR: test_cached_dependency_unblocks_immediately (__main__.TestLevel5.test_cached_dependency_unblocks_immediately)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 217, in test_cached_dependency_unblocks_immediately
+    self.bs.mark_cached("a")
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'mark_cached'
+
+======================================================================
+ERROR: test_cached_tasks_take_no_time_and_free_the_worker (__main__.TestLevel5.test_cached_tasks_take_no_time_and_free_the_worker)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 210, in test_cached_tasks_take_no_time_and_free_the_worker
+    self.bs.mark_cached("a")
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'mark_cached'
+
+======================================================================
+ERROR: test_dependencies_serialise_the_build (__main__.TestLevel5.test_dependencies_serialise_the_build)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 201, in test_dependencies_serialise_the_build
+    self.assertEqual(self.bs.run_parallel(2), 5)
+                     ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'run_parallel'
+
+======================================================================
+ERROR: test_diamond (__main__.TestLevel5.test_diamond)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 227, in test_diamond
+    self.assertEqual(self.bs.run_parallel(2), 8)
+                     ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'run_parallel'
+
+======================================================================
+ERROR: test_independent_tasks_share_workers (__main__.TestLevel5.test_independent_tasks_share_workers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 191, in test_independent_tasks_share_workers
+    self.assertEqual(self.bs.run_parallel(2), 6)
+                     ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'run_parallel'
+
+======================================================================
+ERROR: test_more_workers_than_tasks (__main__.TestLevel5.test_more_workers_than_tasks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 195, in test_more_workers_than_tasks
+    self.assertEqual(self.bs.run_parallel(10), 4)
+                     ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'run_parallel'
+
+======================================================================
+ERROR: test_no_tasks (__main__.TestLevel5.test_no_tasks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 182, in test_no_tasks
+    self.assertEqual(self.bs.run_parallel(4), 0)
+                     ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'run_parallel'
+
+======================================================================
+ERROR: test_single_worker_is_the_total_duration (__main__.TestLevel5.test_single_worker_is_the_total_duration)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 186, in test_single_worker_is_the_total_duration
+    self.assertEqual(self.bs.run_parallel(1), 9)
+                     ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'run_parallel'
+
+======================================================================
+ERROR: test_smallest_ready_id_wins_a_free_worker (__main__.TestLevel5.test_smallest_ready_id_wins_a_free_worker)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/golikovp/anthropic_interview_prep/mocks/m4_build_system/test_solution.py", line 205, in test_smallest_ready_id_wins_a_free_worker
+    self.assertEqual(self.bs.run_parallel(1), 102)
+                     ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BuildSystem' object has no attribute 'run_parallel'
+
+----------------------------------------------------------------------
+Ran 37 tests in 0.003s
+
+FAILED (errors=20)

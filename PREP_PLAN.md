@@ -108,7 +108,13 @@ mocks/m1_file_hosting/   # canonical CodeSignal example, extended to 5 levels
 mocks/m2_banking/        # ledger, top-spenders, deferred cashback, merge, history
 mocks/m3_memory_db/      # key/field store, TTL, backup/restore, transactions
 mocks/m4_build_system/   # DAG, topo order, caching + invalidation, parallel makespan
+mocks/m5_warehouse/      # stock batches, perishable units, orders, historical qty
 ```
+
+M5 was built after M4 to sit squarely in the expected difficulty band: no graphs,
+no heaps, no recursion — dicts, lists and sorting only. Its Level 3 is the one
+that matters, and it is the classic trap: a scalar quantity becomes a list of
+batches with expiries. If you stored `items[id] = 5` at Level 1, you rewrite.
 
 Rules for using them, to keep the practice honest:
 

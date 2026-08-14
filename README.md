@@ -16,6 +16,7 @@ mocks/
   m2_banking/                ledger, top-spenders, deferred cashback, merge, history
   m3_memory_db/              key/field store, TTL, backup/restore, transactions
   m4_build_system/           DAG, topo order, caching + invalidation, parallel makespan
+  m5_warehouse/              stock batches, perishable units, orders, historical qty
 reference/                   worked solutions -- open only after your attempt
 ```
 
@@ -35,4 +36,4 @@ Rules that make the practice worth anything:
 3. No AI assistance of any kind during a run — that includes this tool. Only
    <https://docs.python.org/3/>, same as the real assessment.
 
-145 reference tests across the four mocks, all passing. Python 3.10+, stdlib only.
+182 reference tests across the five mocks, all passing. Python 3.10+, stdlib only.

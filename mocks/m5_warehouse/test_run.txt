@@ -1,0 +1,42 @@
+test_add_stock_accumulates (__main__.TestLevel1.test_add_stock_accumulates) ... ok
+test_add_stock_returns_the_total (__main__.TestLevel1.test_add_stock_returns_the_total) ... ok
+test_get_quantity_missing_item (__main__.TestLevel1.test_get_quantity_missing_item) ... ok
+test_item_survives_being_emptied (__main__.TestLevel1.test_item_survives_being_emptied) ... ok
+test_ship_beyond_stock_changes_nothing (__main__.TestLevel1.test_ship_beyond_stock_changes_nothing) ... ok
+test_ship_missing_item (__main__.TestLevel1.test_ship_missing_item) ... ok
+test_ship_returns_the_remainder (__main__.TestLevel1.test_ship_returns_the_remainder) ... ok
+test_search_breaks_ties_by_item_id (__main__.TestLevel2.test_search_breaks_ties_by_item_id) ... ok
+test_search_matches_a_prefix_not_a_substring (__main__.TestLevel2.test_search_matches_a_prefix_not_a_substring) ... ok
+test_search_no_match (__main__.TestLevel2.test_search_no_match) ... ok
+test_search_orders_by_quantity_descending (__main__.TestLevel2.test_search_orders_by_quantity_descending) ... ok
+test_search_returns_at_most_ten (__main__.TestLevel2.test_search_returns_at_most_ten) ... ok
+test_search_skips_empty_items (__main__.TestLevel2.test_search_skips_empty_items) ... ok
+test_add_stock_at_and_get_quantity_at (__main__.TestLevel3.test_add_stock_at_and_get_quantity_at) ... ok
+test_expiry_is_exclusive (__main__.TestLevel3.test_expiry_is_exclusive) ... ok
+test_item_emptied_by_expiry_still_exists (__main__.TestLevel3.test_item_emptied_by_expiry_still_exists) ... ok
+test_level_one_methods_still_work (__main__.TestLevel3.test_level_one_methods_still_work) ... ok
+test_never_expiring_units_ship_last (__main__.TestLevel3.test_never_expiring_units_ship_last) ... ok
+test_permanent_and_expiring_stock_coexist (__main__.TestLevel3.test_permanent_and_expiring_stock_coexist) ... ok
+test_search_at_hides_expired_stock (__main__.TestLevel3.test_search_at_hides_expired_stock) ... ok
+test_ship_at_cannot_use_expired_units (__main__.TestLevel3.test_ship_at_cannot_use_expired_units) ... ok
+test_ship_at_takes_the_soonest_expiring_first (__main__.TestLevel3.test_ship_at_takes_the_soonest_expiring_first) ... ok
+test_an_order_cancels_only_once (__main__.TestLevel4.test_an_order_cancels_only_once) ... ok
+test_cancel_returns_units_to_stock (__main__.TestLevel4.test_cancel_returns_units_to_stock) ... ok
+test_cancel_unknown_order (__main__.TestLevel4.test_cancel_unknown_order) ... ok
+test_duplicate_order_id_is_rejected (__main__.TestLevel4.test_duplicate_order_id_is_rejected) ... ok
+test_order_beyond_stock_changes_nothing (__main__.TestLevel4.test_order_beyond_stock_changes_nothing) ... ok
+test_order_for_an_unknown_item (__main__.TestLevel4.test_order_for_an_unknown_item) ... ok
+test_place_order_deducts_stock (__main__.TestLevel4.test_place_order_deducts_stock) ... ok
+test_units_that_expired_while_held_are_not_returned (__main__.TestLevel4.test_units_that_expired_while_held_are_not_returned) ... ok
+test_quantity_at_accounts_for_expiry (__main__.TestLevel5.test_quantity_at_accounts_for_expiry) ... ok
+test_quantity_at_before_the_item_existed (__main__.TestLevel5.test_quantity_at_before_the_item_existed) ... ok
+test_quantity_at_ignores_later_operations (__main__.TestLevel5.test_quantity_at_ignores_later_operations) ... ok
+test_quantity_at_reflects_orders_and_cancellations (__main__.TestLevel5.test_quantity_at_reflects_orders_and_cancellations) ... ok
+test_quantity_at_reflects_shipments (__main__.TestLevel5.test_quantity_at_reflects_shipments) ... ok
+test_quantity_at_sees_operations_at_or_before (__main__.TestLevel5.test_quantity_at_sees_operations_at_or_before) ... ok
+test_quantity_at_the_present_matches_get_quantity_at (__main__.TestLevel5.test_quantity_at_the_present_matches_get_quantity_at) ... ok
+
+----------------------------------------------------------------------
+Ran 37 tests in 0.002s
+
+OK
