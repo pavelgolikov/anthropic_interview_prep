@@ -104,8 +104,8 @@ class Warehouse:
     def cancel_order(self, timestamp, order_id):
         if order_id not in self.orders:
             return None
+        units_returned = 0
         for unit in self.orders[order_id]:
-            units_returned = 0
             if not self._alive_unit(timestamp, unit):
                 continue
             self.add_stock_at_with_expiry(timestamp, unit['item_id'], unit['quantity'], unit['expires'] - timestamp)
