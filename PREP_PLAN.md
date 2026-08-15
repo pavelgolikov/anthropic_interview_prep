@@ -109,12 +109,37 @@ mocks/m2_banking/        # ledger, top-spenders, deferred cashback, merge, histo
 mocks/m3_memory_db/      # key/field store, TTL, backup/restore, transactions
 mocks/m4_build_system/   # DAG, topo order, caching + invalidation, parallel makespan
 mocks/m5_warehouse/      # stock batches, perishable units, orders, historical qty
+mocks/m6_filesystem/     # hierarchical paths, subtree rollups, quotas, move, dedup
 ```
 
 M5 was built after M4 to sit squarely in the expected difficulty band: no graphs,
 no heaps, no recursion — dicts, lists and sorting only. Its Level 3 is the one
 that matters, and it is the classic trap: a scalar quantity becomes a list of
 batches with expiries. If you stored `items[id] = 5` at Level 1, you rewrite.
+
+M6 covers the one *structural* shape the other five miss. M1, M2, M3 and M5 are
+all a flat dict keyed by id with a time dimension bolted on; M6 is hierarchical,
+which is a genuinely different data model and appears on the verified family list
+as "file system simulator with hierarchies and permissions". The design fork is
+at Level 1: a flat `dict[full_path]` gives you subtree sizes, `ls` and search by
+string prefix matching, but makes Level 4's `move` a mass re-key; a nested tree
+inverts both. Either works. Committing to one without noticing you chose is what
+costs time.
+
+### Verified problem families (2026 candidate reports)
+
+In-memory key-value DB (most frequently reported) · banking / transactions ·
+cloud storage · file system with hierarchies and permissions · package manager ·
+build system · text editor with undo/redo · web crawler with rate limiting.
+Ramp's confirmed rotation is Cloud Storage / Bank Transaction / Database
+Functionalities — the same three shapes as M1, M2 and M3.
+
+Note that every public source describes **four** levels; the AFP email says five.
+The email wins — L5 is Anthropic's addition and is not publicly documented.
+
+Still unpracticed after M6: text editor with undo/redo (a command history of
+inverse operations) and rate limiting (sliding windows). Both are cheap to reason
+about cold and neither justifies a seventh mock before the sit date.
 
 Rules for using them, to keep the practice honest:
 

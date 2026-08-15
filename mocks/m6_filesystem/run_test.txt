@@ -1,0 +1,42 @@
+test_get_size_of_a_directory_sums_the_subtree (__main__.TestLevel1.test_get_size_of_a_directory_sums_the_subtree) ... ok
+test_missing_paths_and_the_root (__main__.TestLevel1.test_missing_paths_and_the_root) ... ok
+test_mkdir_creates_and_rejects_duplicates (__main__.TestLevel1.test_mkdir_creates_and_rejects_duplicates) ... ok
+test_mkdir_requires_an_existing_parent (__main__.TestLevel1.test_mkdir_requires_an_existing_parent) ... ok
+test_write_file_and_get_size (__main__.TestLevel1.test_write_file_and_get_size) ... ok
+test_write_file_overwrites (__main__.TestLevel1.test_write_file_overwrites) ... ok
+test_write_file_rejects_bad_paths (__main__.TestLevel1.test_write_file_rejects_bad_paths) ... ok
+test_largest_files_orders_by_size_descending (__main__.TestLevel2.test_largest_files_orders_by_size_descending) ... ok
+test_largest_files_ties_limit_and_scope (__main__.TestLevel2.test_largest_files_ties_limit_and_scope) ... ok
+test_ls_is_not_recursive (__main__.TestLevel2.test_ls_is_not_recursive) ... ok
+test_ls_of_a_file_or_a_missing_path (__main__.TestLevel2.test_ls_of_a_file_or_a_missing_path) ... ok
+test_ls_of_an_empty_directory (__main__.TestLevel2.test_ls_of_an_empty_directory) ... ok
+test_ls_of_the_root (__main__.TestLevel2.test_ls_of_the_root) ... ok
+test_ls_returns_sorted_child_names (__main__.TestLevel2.test_ls_returns_sorted_child_names) ... ok
+test_a_quota_counts_only_its_own_users_files (__main__.TestLevel3.test_a_quota_counts_only_its_own_users_files) ... ok
+test_a_write_that_exactly_fills_the_quota (__main__.TestLevel3.test_a_write_that_exactly_fills_the_quota) ... ok
+test_get_usage_for_an_unknown_user (__main__.TestLevel3.test_get_usage_for_an_unknown_user) ... ok
+test_overwriting_transfers_ownership (__main__.TestLevel3.test_overwriting_transfers_ownership) ... ok
+test_quota_blocks_an_oversized_write (__main__.TestLevel3.test_quota_blocks_an_oversized_write) ... ok
+test_root_is_never_limited (__main__.TestLevel3.test_root_is_never_limited) ... ok
+test_set_quota_below_current_usage_fails (__main__.TestLevel3.test_set_quota_below_current_usage_fails) ... ok
+test_write_file_by_sets_the_owner (__main__.TestLevel3.test_write_file_by_sets_the_owner) ... ok
+test_delete_a_directory_removes_the_subtree (__main__.TestLevel4.test_delete_a_directory_removes_the_subtree) ... ok
+test_delete_a_file (__main__.TestLevel4.test_delete_a_file) ... ok
+test_delete_a_missing_path_or_the_root (__main__.TestLevel4.test_delete_a_missing_path_or_the_root) ... ok
+test_delete_frees_quota_usage (__main__.TestLevel4.test_delete_frees_quota_usage) ... ok
+test_move_a_directory_into_itself (__main__.TestLevel4.test_move_a_directory_into_itself) ... ok
+test_move_a_directory_takes_the_subtree (__main__.TestLevel4.test_move_a_directory_takes_the_subtree) ... ok
+test_move_a_file (__main__.TestLevel4.test_move_a_file) ... ok
+test_move_rejects_bad_arguments (__main__.TestLevel4.test_move_rejects_bad_arguments) ... ok
+test_deleting_every_copy_frees_the_bytes (__main__.TestLevel5.test_deleting_every_copy_frees_the_bytes) ... ok
+test_deleting_one_copy_keeps_the_bytes (__main__.TestLevel5.test_deleting_one_copy_keeps_the_bytes) ... ok
+test_different_hashes_are_stored_separately (__main__.TestLevel5.test_different_hashes_are_stored_separately) ... ok
+test_disk_usage_without_hashes (__main__.TestLevel5.test_disk_usage_without_hashes) ... ok
+test_hashed_and_unhashed_files_mix (__main__.TestLevel5.test_hashed_and_unhashed_files_mix) ... ok
+test_identical_hashes_are_stored_once (__main__.TestLevel5.test_identical_hashes_are_stored_once) ... ok
+test_quotas_count_logical_bytes_not_stored_bytes (__main__.TestLevel5.test_quotas_count_logical_bytes_not_stored_bytes) ... ok
+
+----------------------------------------------------------------------
+Ran 37 tests in 0.001s
+
+OK
