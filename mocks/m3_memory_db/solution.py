@@ -6,134 +6,114 @@ import bisect
 
 class MemoryDB:
     def __init__(self):
-        self.db = {} # key: {field: {"value": value, "expires": expiry timestamp}}
-        self.timestamps = []
-        self.backups = []
+        self.kv = {}    # key: {field: {"value": val, "ex": int}}
+        self._tss = []
+        self._snaps = []
         self.stash = None
     
-    def _alive(self, db, key, field, timestamp):
-        if db[key][field]["expires"] is None:
+    def _live(self, ts, key, field):
+        if self.kv[key][field]['ex'] == None:
             return True
-        return db[key][field]["expires"] > timestamp
+        return self.kv[key][field]['ex'] > ts
     
-    def set_at_with_ttl(self, timestamp, key, field, value, ttl):
-        if key not in self.db:
-            self.db[key] = {}
-        self.db[key][field] = {
-            "value": value,
-            "timestamp": timestamp,
-            "expires": None if ttl is None else timestamp + ttl,
-            }
+    def set_at_with_ttl(self, ts, key, field, value, ttl):
+        if key not in self.kv:
+            self.kv[key] = {}
+        self.kv[key][field] = {"val": value,
+                               "ex": None if ttl is None else ttl + ts,
+                               }
         return None
     
-    def set_at(self, timestamp, key, field, value):
-        return self.set_at_with_ttl(timestamp, key, field, value, None)
+    def set_at(self, ts, key, field, value):
+        return self.set_at_with_ttl(ts, key, field, value, None)
     
     def set(self, key, field, value):
         return self.set_at(0, key, field, value)
-
-    def get_at(self, timestamp, key, field):
-        # db = (self.db if self.stash == None else self.stash)
-        if key not in self.db or (key in self.db and field not in self.db[key]):
+    
+    def get_at(self, ts, key, field):
+        if key not in self.kv or field not in self.kv[key] or not self._live(ts, key, field):
             return None
-        if not self._alive(self.db, key, field, timestamp):
-            return None
-        return self.db[key][field]["value"]
+        return self.kv[key][field]['val']
     
     def get(self, key, field):
         return self.get_at(0, key, field)
-
-    def delete_at(self, timestamp, key, field):
-        if key not in self.db or (key in self.db and field not in self.db[key]) or not self._alive(self.db, key, field, timestamp):
+    
+    def delete_at(self, ts, key, field):
+        if key not in self.kv or field not in self.kv[key] or not self._live(ts, key, field):
             return False
-        del self.db[key][field]
-        if len(self.db[key].keys()) == 0:
-            del self.db[key]
+        del self.kv[key][field]
+        if len(self.kv[key].keys()) == 0:
+            del self.kv[key]
         return True
     
     def delete(self, key, field):
         return self.delete_at(0, key, field)
-        
-    def scan_by_prefix_at(self, timestamp, key, prefix):
-        # db = (self.db if self.stash == None else self.stash)
-        if key not in self.db:
+    
+    def scan_by_prefix_at(self, ts, key, prefix):
+        if key not in self.kv:
             return []
-        pairs = [(fld,v) for fld, v in self.db[key].items() if self._alive(self.db, key, fld, timestamp)]
-        pairs_sorted = sorted(pairs)
-        filtered_by_prefix = [x for x in pairs_sorted if x[0].startswith(prefix)]
-        return [f"{x[0]}({x[1]["value"]})" for x in filtered_by_prefix]
+        pairs = [(fn,v['val']) for fn, v in self.kv[key].items() if fn.startswith(prefix) and self._live(ts, key, fn)]
+        pairs = sorted(pairs)
+        pair_str = [f"{x[0]}({x[1]})" for x in pairs]
+        return pair_str
     
     def scan_by_prefix(self, key, prefix):
         return self.scan_by_prefix_at(0, key, prefix)
 
-    def scan_at(self, timestamp, key):
-        return self.scan_by_prefix_at(timestamp, key, "")
-    
+    def scan_at(self, ts, key):
+        return self.scan_by_prefix_at(ts, key, "")
+
     def scan(self, key):
-        return self.scan_at(0, key)
-
-    def backup(self, timestamp):
-        self.timestamps.append(timestamp)
-        snapshot = {}
-        for key, fields in self.db.items():
-            live = {f: dict(e) for f, e in fields.items() if self._alive(self.db, key, f, timestamp)}
-            if live:
-                snapshot[key] = live
-        self.backups.append(snapshot)
-        return len(snapshot.keys())
-    
-    def restore(self, timestamp, timestamp_to_restore):
-        ts_ind = bisect.bisect_right(self.timestamps, timestamp_to_restore) - 1
-        ts_filt = self.timestamps[ts_ind:]
-        if ts_ind < 0:
-            self.db = {}
-            self.timestamps = []
-            self.backups = []
-            return None
+        return self.scan_by_prefix(key, "")
         
-        # rebase the ttls
-        self.db = self.backups[ts_ind]
-        for k, v in self.db.items():
-            for f in v.values():
-                if f['expires'] is not None:
-                    remaining_life = f['expires'] - timestamp_to_restore
-                    f["expires"] = timestamp + remaining_life
-        return None
+    def backup(self, ts):
+        db_to_save = {}
+        for k in self.kv:
+            for f in self.kv[k]:
+                if self._live(ts, k, f):
+                    db_to_save[k] = {}
+                    db_to_save[k][f] = copy.deepcopy(self.kv[k][f])
+        if len(self._tss) > 0 and self._tss[-1] == ts:
+            self._snaps[-1] = copy.deepcopy((db_to_save, self._tss, self._snaps))
+        else:
+            self._tss.append(ts)
+            self._snaps.append(copy.deepcopy((db_to_save, self._tss, self._snaps)))
+        num_keys_live = len(db_to_save.keys())
+        return num_keys_live
     
-    def begin(self, timestamp):
-        if self.stash == None:
-            self.stash = copy.deepcopy(self.db)
-            return True
-        return False
-    
-    def commit(self, timestamp):
+    def restore(self, ts, targ_ts):
+        i = bisect.bisect_right(self._tss, targ_ts) - 1
+        if i < 0 or self._tss == []:
+            self.kv = {}
+            self._tss = []
+            self._snaps = []
+        else:
+            self.kv = copy.deepcopy(self._snaps[i][0])
+            self._tss = copy.deepcopy(self._snaps[i][1])
+            self._snaps = copy.deepcopy(self._snaps[i][2])
+        # adjust ex fields
+        for k in self.kv:
+            for f in self.kv[k]:
+                if self.kv[k][f]['ex'] != None:
+                    self.kv[k][f]['ex'] = ts + (self.kv[k][f]['ex'] - targ_ts)
+        return None 
+
+
+    def begin(self, ts):
+        if self.stash != None:
+            return False
+        self.stash = copy.deepcopy(self.kv)
+        return True
+        
+    def commit(self, ts):
         if self.stash == None:
             return False
         self.stash = None
         return True
-    
-    def abort(self, timestamp):
+
+    def abort(self, ts):
         if self.stash == None:
             return False
-        self.db = self.stash
+        self.kv = self.stash
         self.stash = None
         return True
-        
-
-
-# ## Level 5 — Transactions
-
-# Exactly one transaction may be open at a time.
-
-# - `begin(timestamp)`
-#   - Opens a transaction. Returns `True`, or `False` if one is already open.
-# - `commit(timestamp)`
-#   - Makes every change since `begin` permanent. Returns `True`, or `False` if no
-#     transaction is open.
-# - `abort(timestamp)`
-#   - Discards every change since `begin`. Returns `True`, or `False` if no
-#     transaction is open.
-
-# While a transaction is open, reads (`get_at`, `scan_at`, `scan_by_prefix_at`) see
-# the uncommitted changes. Return values of writes are unaffected by being inside a
-# transaction. `backup` and `restore` are never called inside a transaction.
