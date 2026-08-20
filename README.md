@@ -3,21 +3,15 @@
 Prep workspace for the 90-minute CodeSignal assessment (invited 2026-08-08, due
 2026-08-15).
 
-**Start here: [PREP_PLAN.md](PREP_PLAN.md)** — what the assessment actually is, why
-LeetCode Hard is the wrong prep, and the day-by-day schedule.
-
 ```
-PREP_PLAN.md                 the plan, the intel, the schedule
 cheatsheet/
   icf_patterns.py            the 8 primitives every one of these problems is made of
-  python_speed.md            stdlib recall sheet -- read out loud on Day 5
-mocks/
+  python_speed.md            stdlib recall sheet -- read out loud on Day 5 mocks/
   m1_file_hosting/           canonical CodeSignal example, extended to 5 levels
   m2_banking/                ledger, top-spenders, deferred cashback, merge, history
   m3_memory_db/              key/field store, TTL, backup/restore, transactions
-  m4_build_system/           DAG, topo order, caching + invalidation, parallel makespan
-  m5_warehouse/              stock batches, perishable units, orders, historical qty
-  m6_filesystem/             hierarchical paths, subtree rollups, quotas, move, dedup
+  m4_warehouse/              stock batches, perishable units, orders, historical qty
+  m5_filesystem/             hierarchical paths, subtree rollups, quotas, move, dedup
 reference/                   worked solutions -- open only after your attempt
 ```
 
@@ -37,4 +31,4 @@ Rules that make the practice worth anything:
 3. No AI assistance of any kind during a run — that includes this tool. Only
    <https://docs.python.org/3/>, same as the real assessment.
 
-219 reference tests across the six mocks, all passing. Python 3.10+, stdlib only.
+182 reference tests across the five mocks, all passing. Python 3.10+, stdlib only.
