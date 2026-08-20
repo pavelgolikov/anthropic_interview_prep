@@ -1,8 +1,5 @@
 # Mock 3 — In-Memory Database
 
-> **Read one level at a time.** Implement `MemoryDB` in `solution.py`.
-> `./run.sh 1` … `./run.sh 5`. Where this document and the tests disagree,
-> **the tests win**.
 
 You are implementing an in-memory key–value database. A **key** holds any number of
 named **fields**, each with a string value — think of a key as a row and its fields

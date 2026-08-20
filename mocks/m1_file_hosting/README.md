@@ -1,11 +1,5 @@
 # Mock 1 — File Hosting Service
 
-> **Read one level at a time.** Do not scroll ahead. The skill being trained is
-> designing Level 1 without knowing what Level 4 wants.
->
-> Implement `FileHost` in `solution.py`. Run `./run.sh 1` … `./run.sh 5`.
-> Partial credit is real: a level with 4/6 tests passing is worth more than a level
-> you skipped. Where this document and the tests disagree, **the tests win**.
 
 You are implementing a simplified file hosting service. All state is in memory.
 Timestamps are integers (seconds). There is no wall clock — time only advances when

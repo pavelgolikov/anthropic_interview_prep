@@ -1,8 +1,5 @@
-# Mock 6 — File System
+# Mock 5 — File System
 
-> **Read one level at a time.** Implement `FileSystem` in `solution.py`.
-> `./run.sh 1` … `./run.sh 5`. Where this document and the tests disagree,
-> **the tests win**.
 
 You are implementing an in-memory file system. Paths are absolute, `/`-separated
 strings with no trailing slash: `/`, `/docs`, `/docs/report.txt`. The root

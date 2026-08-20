@@ -1,8 +1,5 @@
-# Mock 5 — Warehouse Inventory
+# Mock 4 — Warehouse Inventory
 
-> **Read one level at a time.** Implement `Warehouse` in `solution.py`.
-> `./run.sh 1` … `./run.sh 5`. Where this document and the tests disagree,
-> **the tests win**.
 
 You are implementing the stock ledger for a warehouse. Items are identified by a
 string id and hold some number of **units**. All state is in memory. Quantities

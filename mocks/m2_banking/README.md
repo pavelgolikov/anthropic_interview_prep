@@ -1,8 +1,5 @@
 # Mock 2 — Banking System
 
-> **Read one level at a time.** Implement `Bank` in `solution.py`.
-> `./run.sh 1` … `./run.sh 5`. Where this document and the tests disagree,
-> **the tests win**.
 
 You are implementing a simplified banking backend. All state is in memory.
 Timestamps are integers in **milliseconds** and are non-decreasing across calls.
