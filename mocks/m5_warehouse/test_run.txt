@@ -40,3 +40,20 @@ test_quantity_at_the_present_matches_get_quantity_at (__main__.TestLevel5.test_q
 Ran 37 tests in 0.002s
 
 OK
+placing order {'order1': [{'quant': 4, 'exp': inf, 'item_id': 'bolt'}]}
+cancel order self.orders {'order1': [{'quant': 4, 'exp': inf, 'item_id': 'bolt'}]}
+cancel order self.orders {}
+returning none in cancel order {}
+placing order {'order1': [{'quant': 4, 'exp': inf, 'item_id': 'bolt'}]}
+cancel order self.orders {'order1': [{'quant': 4, 'exp': inf, 'item_id': 'bolt'}]}
+cancel order self.orders {}
+returning none in cancel order {}
+placing order {'order1': [{'quant': 4, 'exp': inf, 'item_id': 'bolt'}]}
+placing order {'order1': [{'quant': 4, 'exp': inf, 'item_id': 'bolt'}]}
+placing order {'order1': [{'quant': 2, 'exp': 5, 'item_id': 'milk'}, {'quant': 2, 'exp': inf, 'item_id': 'milk'}]}
+cancel order self.orders {'order1': [{'quant': 2, 'exp': 5, 'item_id': 'milk'}, {'quant': 2, 'exp': inf, 'item_id': 'milk'}]}
+cancel order self.orders {}
+placing order {'order1': [{'quant': 4, 'exp': inf, 'item_id': 'bolt'}]}
+cancel order self.orders {'order1': [{'quant': 4, 'exp': inf, 'item_id': 'bolt'}]}
+cancel order self.orders {}
+placing order {'order1': [{'quant': 2, 'exp': 21, 'item_id': 'milk'}]}
